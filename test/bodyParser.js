@@ -19,7 +19,19 @@ describe('connect.bodyParser()', function(){
       done();
     })
   })
-
+  
+  it('should parse Text', function(done){
+    app.request()
+    .post('/')
+    .set('Content-Type', 'text/plain')
+    .write('Hello World')
+    .end(function(res){
+      res.body.should.equal('"Hello World"');
+      done();
+    });
+  })
+  
+  
   it('should parse JSON', function(done){
     app.request()
     .post('/')
